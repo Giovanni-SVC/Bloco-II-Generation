@@ -48,7 +48,7 @@ public class ProdutoController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Produto> put (@PathVariable Produto produto){
+	public ResponseEntity<Produto> put (@RequestBody Produto produto){
 		return ResponseEntity.ok(repository.save(produto));
 	}
 	
