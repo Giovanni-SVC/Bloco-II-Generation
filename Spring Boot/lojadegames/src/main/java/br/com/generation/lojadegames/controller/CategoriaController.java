@@ -32,14 +32,19 @@ public class CategoriaController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> findById(@PathVariable long id){
+	public ResponseEntity<Categoria> findById (@PathVariable long id){
 		return repository.findById(id)
 				.map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
+	@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<Categoria>> findByDescricao (@PathVariable String descricao){
+		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(descricao));
+	}
+	
 	@PostMapping
-	public ResponseEntity<Categoria> post(@RequestBody Categoria categoria){
+	public ResponseEntity<Categoria> post (@RequestBody Categoria categoria){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
 	}
 	
@@ -48,7 +53,7 @@ public class CategoriaController {
 		return ResponseEntity.ok(repository.save(categoria));
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {
 		repository.deleteById(id);
 	}

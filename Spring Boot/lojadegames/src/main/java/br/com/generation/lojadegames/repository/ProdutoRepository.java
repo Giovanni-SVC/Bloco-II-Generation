@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.generation.lojadegames.model.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
-	public List <Produto> findAllByNomeIgnoreCase(String nome);
+	public List <Produto> findAllByNomeContainingIgnoreCase(String nome);
 
 }
