@@ -1,5 +1,6 @@
 package br.com.generation.lojadegames.model;
 
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,7 +27,7 @@ public class Categoria {
 	
 	@NotNull
 	private String descricao;
-	
+
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("categoria")
 	private List<Produto> produto;

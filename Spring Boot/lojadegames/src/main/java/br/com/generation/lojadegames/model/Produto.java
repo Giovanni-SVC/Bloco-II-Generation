@@ -1,13 +1,20 @@
 package br.com.generation.lojadegames.model;
 
 
+
+
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,9 +38,17 @@ public class Produto {
 	@NotNull
 	private int quantidade;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date date = new java.sql.Date(System.currentTimeMillis());
+	
+	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
+		
+	@ManyToOne
+	@JsonIgnoreProperties ("produto")
+	private Usuario usuario;
 
 	public long getId() {
 		return id;
@@ -75,6 +90,14 @@ public class Produto {
 		this.quantidade = quantidade;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -82,8 +105,14 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
-	
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 
 }
