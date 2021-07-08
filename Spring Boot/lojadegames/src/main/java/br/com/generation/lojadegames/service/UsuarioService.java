@@ -25,6 +25,7 @@ public class UsuarioService {
 	public Optional <Usuario> cadastrarUsuario(Usuario usuario) {
 		
 		if(usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
+			
 		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existente!", null);
 		
 		int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
