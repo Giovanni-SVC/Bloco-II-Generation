@@ -1,8 +1,10 @@
 package org.generation.blogPessoal.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -35,11 +38,40 @@ public class Usuario {
 	@NotNull
 	@Size(min = 5)
 	private String senha;
+	
+	@NotNull
+	private boolean admin;
+	
+
+	@Column(name = "data_nascimento")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataNascimento;
+	
+	public Usuario() {}
+	
+	public Usuario(long id, String nome, String usuario, String senha, boolean admin, LocalDate dataNascimento) {
 		
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.admin = admin;
+		this.dataNascimento = dataNascimento;
+	}
+		
+
 	@OneToMany (mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List <Postagem> postagem;
 
+
+		public List<Postagem> getPostagem() {
+		return postagem;
+		}
+
+		public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
+		}
 
 		public long getId() {
 			return id;
@@ -72,5 +104,22 @@ public class Usuario {
 		public void setSenha(String senha) {
 			this.senha = senha;
 		}
+		
+		public LocalDate getDataNascimento() {
+			return dataNascimento;
+		}
+
+		public void setDataNascimento(LocalDate dataNascimento) {
+			this.dataNascimento = dataNascimento;
+		}
+		
+		public boolean isAdmin() {
+			return admin;
+		}
+
+		public void setAdmin(boolean admin) {
+			this.admin = admin;
+		}
+
 
 }

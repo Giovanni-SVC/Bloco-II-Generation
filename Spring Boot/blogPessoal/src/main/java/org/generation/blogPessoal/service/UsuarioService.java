@@ -1,6 +1,8 @@
 package org.generation.blogPessoal.service;
 
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Optional;
 
 import org.generation.blogPessoal.model.Usuario;
@@ -18,25 +20,36 @@ public class UsuarioService {
 
 	@Autowired //injetando o repositório de usuário
 	private UsuarioRepository usuarioRepository;
-
-	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
-		
+	
+	public Optional <Usuario> cadastrarUsuario(Usuario usuario) {
 		
 		if(usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
-			return null;
+			
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existente!", null);
+		
+		int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+		
+		if(idade < 18) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos!", null);
+		}
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
+		
 		String senhaEncoder = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaEncoder);
-
+		
 		return Optional.of(usuarioRepository.save(usuario));
 	}
-
 	
 	public Optional<Usuario> atualizarUsuario(Usuario usuario){
 		
 		if(usuarioRepository.findById(usuario.getId()).isPresent()) {
+			
+			int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+			
+			if(idade < 18) {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos!", null);
+			}
 					
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			
@@ -67,12 +80,15 @@ public class UsuarioService {
 				String authHeader = "Basic " + new String(encodedAuth);
 
 				usuarioLogin.get().setToken(authHeader);				
+				usuarioLogin.get().setNome(usuario.get().getNome());
 				usuarioLogin.get().setSenha(usuario.get().getSenha());
 				
 				return usuarioLogin;
 
 			}
 		}
-		return null;
-	}
+		throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuário ou senha inválidos!", null);
+}
+
+
 }
