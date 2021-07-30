@@ -40,7 +40,7 @@ public class UsuarioRepositoryTest {
 
     	LocalDate data = LocalDate.parse("2000-07-22", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     	
-        Usuario usuario = new Usuario(0L, "Giovanni Cerqueira", "giovanni@email.com.br", "giovanni123", data);
+        Usuario usuario = new Usuario(0L, "Giovanni Cerqueira", "giovanni@email.com.br", "giovanni123");
         
         /**
 		 * A linha do if agora impede a duplicação dos dados. Caso ocorra a duplicação,
@@ -55,17 +55,17 @@ public class UsuarioRepositoryTest {
         if(usuarioRepository.findByLogin(usuario.getLogin()) != null)
 			usuarioRepository.save(usuario);
         
-        usuario = new Usuario(0, "Marcelo Cerqueira", "marcelo@email.com.br", "marcelo123", data);
+        usuario = new Usuario(0, "Marcelo Cerqueira", "marcelo@email.com.br", "marcelo123");
 
         if(usuarioRepository.findByLogin(usuario.getLogin()) != null)
             usuarioRepository.save(usuario);
 
-        usuario = new Usuario(0, "Luzia Cerqueira", "luzia@email.com.br", "luzia123", data);
+        usuario = new Usuario(0, "Luzia Cerqueira", "luzia@email.com.br", "luzia123");
 
         if(usuarioRepository.findByLogin(usuario.getLogin()) != null)
             usuarioRepository.save(usuario);
 
-       	usuario = new Usuario(0, "Harry Potter", "harry@email.com.br", "harry123", data);
+       	usuario = new Usuario(0, "Harry Potter", "harry@email.com.br", "harry123");
 
         if(usuarioRepository.findByLogin(usuario.getLogin()) != null)
             usuarioRepository.save(usuario);

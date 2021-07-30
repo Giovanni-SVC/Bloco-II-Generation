@@ -67,7 +67,7 @@ public class UsuarioControllerTest {
         
          
          LocalDate dataPut = LocalDate.parse("2002-07-22", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-         usuarioUpdate = new Usuario(1L, "Giovanni Cerqueira", "giovanni@email.com.br", "giovanni123", dataPut);
+         usuarioUpdate = new Usuario(1L, "Giovanni Cerqueira", "giovanni@email.com.br", "giovanni123");
          //Não esquecer de verificar o ID no banco de dados. Neste caso, o banco estava vazio!
  	}
 

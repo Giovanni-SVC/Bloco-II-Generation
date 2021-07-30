@@ -48,7 +48,7 @@ public class UsuarioTest {
     	
     	LocalDate data = LocalDate.parse("2000-07-22", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     	
-    	usuario = new Usuario(0L, "João da Silva", "joao@email.com.br", "13465278", data);
+    	usuario = new Usuario(0L, "João da Silva", "joao@email.com.br", "13465278");
        
     	
     }

@@ -31,11 +31,11 @@ public Usuario cadastrarUsuario(Usuario usuario) {
 
 		// Verifica se o usuário é maior de idade
 		 
-		int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+		/*int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
 		
 		if(idade < 18)
 			throw new ResponseStatusException(
-						HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos", null);
+						HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos", null);*/
 			
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -50,11 +50,11 @@ public Usuario cadastrarUsuario(Usuario usuario) {
 		if(usuarioRepository.findById(usuario.getId()).isPresent()) {
 		
 			
-			int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+			/*int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
 			
 			if(idade < 18)
 				throw new ResponseStatusException(
-							HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos", null); 
+							HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos", null); */
 			
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			
@@ -88,6 +88,7 @@ public Usuario cadastrarUsuario(Usuario usuario) {
 				usuarioLogin.get().setId(usuarioLogin.get().getId());
 				usuarioLogin.get().setToken(authHeader);				
 				usuarioLogin.get().setNome(usuario.get().getNome());
+				usuarioLogin.get().setLogin(usuario.get().getLogin());
 				usuarioLogin.get().setSenha(usuario.get().getSenha());
 				usuarioLogin.get().setFoto(usuarioLogin.get().getFoto());
 				usuarioLogin.get().setTipo(usuarioLogin.get().getTipo());
