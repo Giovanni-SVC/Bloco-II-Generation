@@ -4,10 +4,11 @@ package br.org.generation.blogpessoal.model;
 
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -53,21 +54,21 @@ public class Usuario {
 	private List<Postagem> postagem;
 	
 	
-	/*@Column(name = "dt_nascimento")
+	@Column(name = "dt_nascimento")
 	@JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dataNascimento; // Atributo adicional
-	*/
+	
 	
 	public Usuario() {
 		
 	} // Objeto vazio com tudo nulo. Tem o objetivo de testar as condições de erro na classe model.
 
-	public Usuario(long id, String nome, String login, String senha /*LocalDate dataNascimento*/) {
+	public Usuario(long id, String nome, String login, String senha, LocalDate dataNascimento) {
 		this.id = id;
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
-		/*this.dataNascimento = dataNascimento;*/
+		this.dataNascimento = dataNascimento;
 	}
 
 	public long getId() {
@@ -102,13 +103,13 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	/*public LocalDate getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}*/
+	}
 
 	public String getFoto() {
 		return foto;
