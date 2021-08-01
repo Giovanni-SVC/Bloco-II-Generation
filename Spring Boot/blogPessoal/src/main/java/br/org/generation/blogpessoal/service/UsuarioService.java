@@ -50,11 +50,11 @@ public Usuario cadastrarUsuario(Usuario usuario) {
 		if(usuarioRepository.findById(usuario.getId()).isPresent()) {
 		
 			
-			/*int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
+			int idade = Period.between(usuario.getDataNascimento(), LocalDate.now()).getYears();
 			
 			if(idade < 18)
 				throw new ResponseStatusException(
-							HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos", null); */
+							HttpStatus.BAD_REQUEST, "Usuário menor de 18 anos", null); 
 			
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			
